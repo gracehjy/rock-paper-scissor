@@ -10,7 +10,6 @@ function checkForWin(userMove, compMove){
     else if(compMove === "rock" && userMove === "scissor"
     || compMove === "scissor" && userMove === "paper"
     || compMove === "paper" && userMove === "rock"){
-        compScore++;
         document.getElementById('result').innerHTML = "Result: Sorry, You Lost...";
     }
     else{
