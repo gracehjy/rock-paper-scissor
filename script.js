@@ -1,40 +1,55 @@
-//create variables for user input and comp moves
-let userMove = prompt("Pick a move: ").toLowerCase();
-let moves = ["rock", "paper", "scissor"];
 
-//create a function that randomly generates a move
-function randomMove() {
-    return moves[parseInt((Math.random()*3))];
-}
-
-let compMove = randomMove();
-console.log("Computer's move: "+compMove);
-
-//create a function that checks for a win
+//check for a win and display result message
 function checkForWin(userMove, compMove){
+    document.getElementById('compMove').innerHTML = "The computer chose:";
+    document.getElementById('compMoveBox').innerHTML = getCompMoveEmoji(compMove);
+    document.getElementById('compMoveBox').style.visibility = "visible";
     if(userMove === "rock" && compMove === "scissor"
     || userMove === "scissor" && compMove === "paper"
     || userMove === "paper" && compMove === "rock"){
-        console.log("You win!");
-        return true;
+        document.getElementById('result').style.color = 'green';
+        document.getElementById('result').innerHTML = "Congrats, You Won!";
     }
     else if(compMove === "rock" && userMove === "scissor"
     || compMove === "scissor" && userMove === "paper"
     || compMove === "paper" && userMove === "rock"){
-        console.log("You lost! Better luck next time...");
-        return true;
+        document.getElementById('result').style.color = 'red';
+        document.getElementById('result').innerHTML = "Sorry, You Lost...";
     }
     else{
-        console.log("Tie!");
-        return false;
+        document.getElementById('result').style.color = 'white';
+        document.getElementById('result').innerHTML = "Tie!";
     }
 }
 
-//while the there hasn't been a win, randomly generate a move and ask the user for input
-let win = checkForWin(userMove, compMove);
-while(win === false){
-    userMove = prompt("Pick a move: ").toLowerCase();
-    compMove = randomMove();
-    console.log("Computer's move: "+compMove);
-    win = checkForWin(userMove, compMove);
+//get compMove
+let moves = ['rock', 'paper', 'scissor'];
+function randomMove() {
+    return moves[parseInt((Math.random()*3))];
+}
+
+function getCompMoveEmoji(compMove){
+    if(compMove === 'rock'){
+        return "✊";
+    }
+    else if(compMove === 'paper'){
+        return "✋";
+    }
+    else{
+        return "✌";
+    }
+}
+
+//now we make the ui work
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissor = document.getElementById('scissor');
+
+rock.addEventListener('click', () => game('rock'));
+paper.addEventListener('click', () => game('paper'));
+scissor.addEventListener('click', () => game('scissor'));
+
+function game(userMove){
+    const compMove = randomMove();
+    checkForWin(userMove, compMove);
 }
