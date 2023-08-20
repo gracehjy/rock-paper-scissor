@@ -1,5 +1,5 @@
 
-//check for a win and update scores
+//check for a win and display result message
 function checkForWin(userMove, compMove){
     document.getElementById('compMove').innerHTML = "The computer chose:";
     document.getElementById('compMoveBox').innerHTML = getCompMoveEmoji(compMove);
@@ -7,15 +7,18 @@ function checkForWin(userMove, compMove){
     if(userMove === "rock" && compMove === "scissor"
     || userMove === "scissor" && compMove === "paper"
     || userMove === "paper" && compMove === "rock"){
-        document.getElementById('result').innerHTML = "Result: Congrats, You Won!";
+        document.getElementById('result').style.color = 'green';
+        document.getElementById('result').innerHTML = "Congrats, You Won!";
     }
     else if(compMove === "rock" && userMove === "scissor"
     || compMove === "scissor" && userMove === "paper"
     || compMove === "paper" && userMove === "rock"){
-        document.getElementById('result').innerHTML = "Result: Sorry, You Lost...";
+        document.getElementById('result').style.color = 'red';
+        document.getElementById('result').innerHTML = "Sorry, You Lost...";
     }
     else{
-        document.getElementById('result').innerHTML = "Result: Tie!";
+        document.getElementById('result').style.color = 'white';
+        document.getElementById('result').innerHTML = "Tie!";
     }
 }
 
@@ -37,7 +40,7 @@ function getCompMoveEmoji(compMove){
     }
 }
 
-//now we make it all actually work lmao
+//now we make the ui work
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissor = document.getElementById('scissor');
